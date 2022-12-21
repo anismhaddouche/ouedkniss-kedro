@@ -1,6 +1,12 @@
 """ouedkniss-kedro file for ensuring the package is executable
 as `ouedkniss-kedro` and `python -m ouedkniss_kedro`
 """
+
+# import warnings
+# warnings.filterwarnings("ignore", category=DeprecationWarning) 
+
+
+
 import importlib
 from pathlib import Path
 

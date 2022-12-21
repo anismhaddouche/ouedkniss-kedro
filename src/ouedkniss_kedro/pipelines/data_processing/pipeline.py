@@ -21,5 +21,8 @@ def create_pipeline(**kwargs) -> Pipeline:
                 outputs="preprocessed_announcements",
                 name="preprocess_announcements_node",
             ),
-        ]
+        ],
+        namespace="data_processing",
+        inputs=["data"],
+        outputs="preprocessed_announcements",
     )

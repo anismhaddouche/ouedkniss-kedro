@@ -10,5 +10,5 @@ data:
   filepath: data/01_raw/data.json
 
 preprocessed_announcements:
-  type: pandas.CSVDataSet
-  filepath: data/02_intermediate/preprocessed_announcements.csv
+  type: pandas.ParquetDataSet
+  filepath: data/02_intermediate/preprocessed_announcements.parquet
