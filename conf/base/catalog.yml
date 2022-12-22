@@ -9,6 +9,6 @@ data:
   type: json.JSONDataSet
   filepath: data/01_raw/data.json
 
-preprocessed_announcements:
+asset:
   type: pandas.ParquetDataSet
-  filepath: data/02_intermediate/preprocessed_announcements.parquet
+  filepath: data/02_intermediate/asset.parquet
