@@ -1,0 +1,7 @@
+{
+    "files.autoSave": "afterDelay",
+    "python.autoComplete.extraPaths": [
+    
+    ],
+    "python.defaultInterpreterPath": "/Users/anis/miniforge3/envs/scraping"
+}

@@ -8,7 +8,17 @@
 data:
   type: json.JSONDataSet
   filepath: data/01_raw/data.json
+  layer: raw
 
-asset:
+
+data_source_cleaning.asset:
   type: pandas.ParquetDataSet
   filepath: data/02_intermediate/asset.parquet
+  layer: intermediate
+
+
+asset_cleaned:
+  type: pandas.ParquetDataSet
+  filepath: data/03_primary/asset_cleaned.parquet
+  layer : primary
+  

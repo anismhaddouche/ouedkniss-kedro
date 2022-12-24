@@ -1,5 +1,5 @@
 """
-This is a boilerplate pipeline 'get_asset'
+This is a boilerplate pipeline 'DataSourceCleaning'
  using Kedro 0.18.4
 """
 
@@ -75,9 +75,8 @@ def get_asset(data) -> pd.DataFrame:
     """
     # Convert Data, which is a list of lists, into one flatten list 
     asset = pd.DataFrame([item for sublist in data for item in sublist]) 
-
     # Get id 
-    idx = asset["id"]
+    id = asset["id"]
     # Get slug 
     slug = asset["slug"]
     # Get description 
@@ -87,7 +86,7 @@ def get_asset(data) -> pd.DataFrame:
     # Get the number of like 
     likeCount = asset["likeCount"]
     # Convert 'createdAt' to a Datetime format 
-    createdAt = pd.to_datetime(asset['createdAt'])
+    createdAt = asset["createdAt"] 
     #Convert each raw of 'category', which is a dict (eg : {"name": "Appartement"}), to a sting  (eg :"Appartement")
     category = asset["category"].apply(lambda x :x["name"])
     #Get the commune 
@@ -108,9 +107,51 @@ def get_asset(data) -> pd.DataFrame:
     specs = get_specs(asset["specs"])
     specs["medias"] = medias
     # Create the outout DataFrame
-    df_1 = pd.DataFrame([idx,category,slug,description,price,priceType,priceUnit,wilaya,commune,createdAt,likeCount,isFromStore]).T
-    # Convert some variable 
-    df_1["priceType"] = df_1["priceType"].astype("category")
-    df_1["priceUnit"] = df_1["priceUnit"].astype("category")
+    asset = pd.DataFrame([id,category,slug,description,price,priceType,priceUnit,wilaya,commune,createdAt,likeCount,isFromStore]).T
 
-    return df_1.join(specs)
+    # Convert some variables  dtypes
+    # TODO : create a function that convert asset
+    asset =  asset.join(specs)
+
+    asset["priceType"] = asset["priceType"].astype("category")
+    asset["priceUnit"] = asset["priceUnit"].astype("category")
+    asset["id"] = asset["id"].astype('int')
+    asset["category"] = asset["category"].astype("category")
+    asset['createdAt'] = pd.to_datetime(asset['createdAt'])
+    asset["slug"] = asset["slug"].astype("string")
+    asset["wilaya"] = asset["wilaya"].astype("category")
+    asset["commune"] = asset["commune"].astype("category")
+    asset["location_duree"] = asset["location_duree"].str.extract('(\\d)').astype('Int64')
+    asset["superficie"] = asset["superficie"].str.extract('(\\d+)').astype('Int64')
+    asset["pieces"] = asset["pieces"].str.extract('(\\d{1,2})').astype('Int64')
+    asset["asset-in-a-promotional-site"]=asset["asset-in-a-promotional-site"].astype('bool')
+    #TODO  : convert 'property-specifications' and 'papers'
+    return asset
+
+
+
+def cleaning(asset) -> pd.DataFrame : 
+    """
+    Clean asset data 
+    """
+    asset_cleaned = asset
+    return asset_cleaned
+
+    #   df = pd.DataFrame([id,category,slug,description,price,priceType,priceUnit,wilaya,commune,createdAt,likeCount,isFromStore]).T
+
+    # # Convert some variables  dtypes
+    # # TODO : create a function that convert asset
+    # asset =  df.join(specs)
+
+    # df["priceType"] = df["priceType"].astype("category")
+    # df["priceUnit"] = df["priceUnit"].astype("category")
+    # df["id"] = df["id"].astype('int')
+    # df["category"] = df["category"].astype("category")
+    # df['createdAt'] = pd.to_datetime(df['createdAt'])
+    # df["slug"] = df["slug"].astype("string")
+    # df["wilaya"] = df["wilaya"].astype("category")
+    # df["commune"] = df["commune"].astype("category")
+    # df["location_duree"] = df["location_duree"].str.extract('(\\d)').astype('Int64')
+
+    # # Concatenate the two dataframes df and spec
+    # return asset
