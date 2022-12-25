@@ -26,8 +26,8 @@ def get_wilaya(x: list):
 
 def get_medias(column: pd.Series) -> pd.Series:
     """
-    In this dataset medias means urls of the annoucements.
-    We create a new column containing a list of avaible urls
+    In this dataset medias means urls of the announcements.
+    We create a new column containing a list of available urls
     """
     media_all = []
     for index, _ in column.items():
