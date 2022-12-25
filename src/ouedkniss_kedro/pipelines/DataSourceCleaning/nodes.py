@@ -96,9 +96,7 @@ def get_asset(data) -> pd.DataFrame:
     # Get the wilaya
     wilaya = asset["cities"].apply(lambda x: get_wilaya(x)).rename("wilaya")
     # Get the Store name
-    store = asset["store"].apply(
-        lambda x: x.get("slug") if x is not None else None
-    )
+    store = asset["store"].apply(lambda x: x.get("slug") if x is not None else None)
     # Convert PriceType to a categorical data
     priceType = asset["priceType"]
     # Get the price in million
@@ -132,7 +130,6 @@ def get_asset(data) -> pd.DataFrame:
     # Convert some variables  dtypes
     # TODO : create a function that convert asset
     asset = asset.join(specs)
-
     asset["priceType"] = asset["priceType"].astype("category")
     asset["priceUnit"] = asset["priceUnit"].astype("category")
     asset["id"] = asset["id"].astype("int")
@@ -141,16 +138,10 @@ def get_asset(data) -> pd.DataFrame:
     asset["slug"] = asset["slug"].astype("string")
     asset["wilaya"] = asset["wilaya"].astype("category")
     asset["commune"] = asset["commune"].astype("category")
-    asset["location_duree"] = (
-        asset["location_duree"].str.extract("(\\d)").astype("Int64")
-    )
-    asset["superficie"] = (
-        asset["superficie"].str.extract("(\\d+)").astype("Int64")
-    )
+    asset["location_duree"] = asset["location_duree"].str.extract("(\\d)").astype("Int64")
+    asset["superficie"] = asset["superficie"].str.extract("(\\d+)").astype("Int64")
     asset["pieces"] = asset["pieces"].str.extract("(\\d{1,2})").astype("Int64")
-    asset["asset-in-a-promotional-site"] = asset[
-        "asset-in-a-promotional-site"
-    ].astype("bool")
+    asset["asset-in-a-promotional-site"] = asset["asset-in-a-promotional-site"].astype("bool")
     # TODO  : convert 'property-specifications' and 'papers'
     return asset
 
