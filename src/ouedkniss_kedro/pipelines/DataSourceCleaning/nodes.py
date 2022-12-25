@@ -26,7 +26,8 @@ def get_wilaya(x: list):
 
 def get_medias(column: pd.Series) -> pd.Series:
     """
-    In this dataset medias means urls of the annoucements. We create a new column containing a list of avaible urls
+    In this dataset medias means urls of the annoucements.
+    We create a new column containing a list of avaible urls
     """
     media_all = []
     for index, _ in column.items():
@@ -43,7 +44,8 @@ def get_medias(column: pd.Series) -> pd.Series:
 def get_specs(column: pd.Series) -> pd.DataFrame:
     """
     Extract the following specification from the column "specs" :
-        location_duree, superficie,	pieces,	asset-in-a-promotional-site	property-specifications,	papers,	etages	sale-by-real-estate-agent,	property-payment-conditions
+    location_duree, superficie,	pieces,	asset-in-a-promotional-site	property-specifications,
+    papers,	etages	sale-by-real-estate-agent,	property-payment-conditions
     """
 
     specs_all = []
@@ -94,7 +96,9 @@ def get_asset(data) -> pd.DataFrame:
     # Get the wilaya
     wilaya = asset["cities"].apply(lambda x: get_wilaya(x)).rename("wilaya")
     # Get the Store name
-    store = asset["store"].apply(lambda x: x.get("slug") if x != None else None)
+    store = asset["store"].apply(
+        lambda x: x.get("slug") if x is not None else None
+    )
     # Convert PriceType to a categorical data
     priceType = asset["priceType"]
     # Get the price in million
@@ -121,6 +125,7 @@ def get_asset(data) -> pd.DataFrame:
             createdAt,
             likeCount,
             isFromStore,
+            store,
         ]
     ).T
 
@@ -139,11 +144,13 @@ def get_asset(data) -> pd.DataFrame:
     asset["location_duree"] = (
         asset["location_duree"].str.extract("(\\d)").astype("Int64")
     )
-    asset["superficie"] = asset["superficie"].str.extract("(\\d+)").astype("Int64")
-    asset["pieces"] = asset["pieces"].str.extract("(\\d{1,2})").astype("Int64")
-    asset["asset-in-a-promotional-site"] = asset["asset-in-a-promotional-site"].astype(
-        "bool"
+    asset["superficie"] = (
+        asset["superficie"].str.extract("(\\d+)").astype("Int64")
     )
+    asset["pieces"] = asset["pieces"].str.extract("(\\d{1,2})").astype("Int64")
+    asset["asset-in-a-promotional-site"] = asset[
+        "asset-in-a-promotional-site"
+    ].astype("bool")
     # TODO  : convert 'property-specifications' and 'papers'
     return asset
 
