@@ -1,0 +1,180 @@
+{
+    "edges": [
+        {
+            "source": "a1d76578",
+            "target": "ecd31459"
+        },
+        {
+            "source": "ecd31459",
+            "target": "355b5da0"
+        },
+        {
+            "source": "a17c9aaa",
+            "target": "data_source_cleaning"
+        },
+        {
+            "source": "a17c9aaa",
+            "target": "a1d76578"
+        },
+        {
+            "source": "355b5da0",
+            "target": "3f882dda"
+        },
+        {
+            "source": "data_source_cleaning",
+            "target": "3f882dda"
+        }
+    ],
+    "layers": [
+        "raw",
+        "intermediate",
+        "primary"
+    ],
+    "modular_pipelines": {
+        "__root__": {
+            "children": [
+                {
+                    "id": "3f882dda",
+                    "type": "data"
+                },
+                {
+                    "id": "a17c9aaa",
+                    "type": "data"
+                },
+                {
+                    "id": "data_source_cleaning",
+                    "type": "modularPipeline"
+                }
+            ],
+            "id": "__root__",
+            "inputs": [],
+            "name": "Root",
+            "outputs": []
+        },
+        "data_source_cleaning": {
+            "children": [
+                {
+                    "id": "ecd31459",
+                    "type": "data"
+                },
+                {
+                    "id": "a1d76578",
+                    "type": "task"
+                },
+                {
+                    "id": "355b5da0",
+                    "type": "task"
+                }
+            ],
+            "id": "data_source_cleaning",
+            "inputs": [
+                "a17c9aaa"
+            ],
+            "name": "Data Source Cleaning",
+            "outputs": [
+                "3f882dda"
+            ]
+        }
+    },
+    "nodes": [
+        {
+            "full_name": "get_asset_node",
+            "id": "a1d76578",
+            "modular_pipelines": [
+                "data_source_cleaning"
+            ],
+            "name": "Get Asset Node",
+            "parameters": {},
+            "pipelines": [
+                "DataSourceCleaning",
+                "__default__"
+            ],
+            "tags": [],
+            "type": "task"
+        },
+        {
+            "dataset_type": "kedro.extras.datasets.json.json_dataset.JSONDataSet",
+            "full_name": "data",
+            "id": "a17c9aaa",
+            "layer": "raw",
+            "modular_pipelines": [],
+            "name": "Data",
+            "pipelines": [
+                "DataSourceCleaning",
+                "__default__"
+            ],
+            "tags": [],
+            "type": "data"
+        },
+        {
+            "dataset_type": "kedro.extras.datasets.pandas.parquet_dataset.ParquetDataSet",
+            "full_name": "data_source_cleaning.asset",
+            "id": "ecd31459",
+            "layer": "intermediate",
+            "modular_pipelines": [
+                "data_source_cleaning"
+            ],
+            "name": "Asset",
+            "pipelines": [
+                "DataSourceCleaning",
+                "__default__"
+            ],
+            "tags": [],
+            "type": "data"
+        },
+        {
+            "full_name": "cleaning_node",
+            "id": "355b5da0",
+            "modular_pipelines": [
+                "data_source_cleaning"
+            ],
+            "name": "Cleaning Node",
+            "parameters": {},
+            "pipelines": [
+                "DataSourceCleaning",
+                "__default__"
+            ],
+            "tags": [],
+            "type": "task"
+        },
+        {
+            "dataset_type": "kedro.extras.datasets.pandas.parquet_dataset.ParquetDataSet",
+            "full_name": "asset_cleaned",
+            "id": "3f882dda",
+            "layer": "primary",
+            "modular_pipelines": [],
+            "name": "Asset Cleaned",
+            "pipelines": [
+                "DataSourceCleaning",
+                "__default__"
+            ],
+            "tags": [],
+            "type": "data"
+        },
+        {
+            "dataset_type": null,
+            "full_name": "data_source_cleaning",
+            "id": "data_source_cleaning",
+            "layer": null,
+            "modular_pipelines": null,
+            "name": "Data Source Cleaning",
+            "pipelines": [
+                "__default__"
+            ],
+            "tags": [],
+            "type": "modularPipeline"
+        }
+    ],
+    "pipelines": [
+        {
+            "id": "__default__",
+            "name": "Default"
+        },
+        {
+            "id": "DataSourceCleaning",
+            "name": "Datasourcecleaning"
+        }
+    ],
+    "selected_pipeline": "__default__",
+    "tags": []
+}
