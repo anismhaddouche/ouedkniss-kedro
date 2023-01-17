@@ -8,6 +8,7 @@ To get an overview of the pipeline structure in this project, run :
 
 ```
 kedro viz --load-file my_shareable_pipeline.json
+```
 
 ## How to install dependencies
 
