@@ -4,6 +4,10 @@
 
 In this Kedro project, we aim to scrape real estate data from the website `Ouedkniss` in order to create a machine learning model that estimate the price of a real estate. This project also integrate the `DagHub MLOps` technology (see https://dagshub.com/anismhaddouche/ouedkniss-kedro).
 
+To get an overview of the pipeline structure in this project, run :
+
+```
+kedro viz --load-file my_shareable_pipeline.json
 
 ## How to install dependencies
 
