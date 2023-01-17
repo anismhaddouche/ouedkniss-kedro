@@ -1,19 +1,9 @@
-# ouedkniss-kedro
+# Documentation
 
 ## Overview
 
-This is your new Kedro project, which was generated using `Kedro 0.18.4`.
+In this Kedro project, we aim to scrape real estate data from the website `Ouedkniss` in order to create a machine learning model that estimate the price of a real estate. This project also integrate the `DagHub MLOps` technology (see https://dagshub.com/anismhaddouche/ouedkniss-kedro).
 
-Take a look at the [Kedro documentation](https://kedro.readthedocs.io) to get started.
-
-## Rules and guidelines
-
-In order to get the best out of the template:
-
-* Don't remove any lines from the `.gitignore` file we provide
-* Make sure your results can be reproduced by following a [data engineering convention](https://kedro.readthedocs.io/en/stable/faq/faq.html#what-is-data-engineering-convention)
-* Don't commit data to your repository
-* Don't commit any credentials or your local configuration to your repository. Keep all your credentials and local configuration in `conf/local/`
 
 ## How to install dependencies
 
@@ -25,17 +15,17 @@ To install them, run:
 pip install -r src/requirements.txt
 ```
 
-## How to run your Kedro pipeline
+## How to run the Kedro pipeline
 
-You can run your Kedro project with:
+You can run this Kedro project with:
 
 ```
 kedro run
 ```
 
-## How to test your Kedro project
+## How to test the Kedro project
 
-Have a look at the file `src/tests/test_run.py` for instructions on how to write your tests. You can run your tests as follows:
+Have a look at the file `src/tests/test_run.py` for instructions on how to write the tests. You can run your tests as follows:
 
 ```
 kedro test
@@ -116,7 +106,3 @@ kedro jupyter convert --all
 To automatically strip out all output cell contents before committing to `git`, you can run `kedro activate-nbstripout`. This will add a hook in `.git/config` which will run `nbstripout` before anything is committed to `git`.
 
 > *Note:* Your output cells will be retained locally.
-
-## Package your Kedro project
-
-[Further information about building project documentation and packaging your project](https://kedro.readthedocs.io/en/stable/tutorial/package_a_project.html)
